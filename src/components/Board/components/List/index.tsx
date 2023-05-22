@@ -7,9 +7,10 @@ import Card from "../Card";
 
 type ListProps = {
   data: ListItem;
+  listIndex: number;
 };
 
-const List = ({ data }: ListProps) => {
+const List = ({ data, listIndex }: ListProps) => {
   return (
     <S.Container done={data?.done}>
       <header>
@@ -21,9 +22,14 @@ const List = ({ data }: ListProps) => {
         )}
       </header>
 
-      <ul>
-        {data.cards.map((cardData) => (
-          <Card key={cardData.id} data={cardData} />
+      <ul key={listIndex}>
+        {data.cards.map((card, cardIndex) => (
+          <Card
+            key={card.id}
+            listIndex={listIndex}
+            cardIndex={cardIndex}
+            data={card}
+          />
         ))}
       </ul>
     </S.Container>
